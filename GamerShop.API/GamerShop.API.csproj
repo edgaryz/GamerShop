@@ -14,8 +14,4 @@
     <ProjectReference Include="..\GamerShop.Core\GamerShop.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
