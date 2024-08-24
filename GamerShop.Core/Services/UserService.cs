@@ -16,12 +16,12 @@ namespace GamerShop.Core.Services
             return await _userDbRepository.GetAllUsers();
         }
 
-        public async Task<int> GetTotalUsersCount()
+        public async Task<int> GetTotalUserCount()
         {
             return await _userDbRepository.GetTotalUserCount();
         }
 
-        public async Task<User> GetUsersById(int id)
+        public async Task<User> GetUserById(int id)
         {
             return await _userDbRepository.GetUserById(id);
         }
