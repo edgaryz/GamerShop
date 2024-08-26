@@ -12,8 +12,8 @@ namespace GamerShop.Core.Repositories
         public MongoDbRepository(IMongoClient mongoClient)
         {
             _users = mongoClient.GetDatabase("users").GetCollection<User>("users");
-            _products = mongoClient.GetDatabase("products").GetCollection<Product>("users");
-            _orders = mongoClient.GetDatabase("users").GetCollection<Order>("users");
+            _products = mongoClient.GetDatabase("products").GetCollection<Product>("products");
+            _orders = mongoClient.GetDatabase("orders").GetCollection<Order>("orders");
         }
 
         //User
@@ -49,6 +49,11 @@ namespace GamerShop.Core.Repositories
             return await _users.CountDocumentsAsync(x => true);
         }
 
+        public async Task ClearUserCache()
+        {
+            await _users.Database.DropCollectionAsync("users");
+        }
+
         //Product
         public async Task<List<Product>> GetAllProducts()
         {
@@ -82,6 +87,11 @@ namespace GamerShop.Core.Repositories
             return await _products.CountDocumentsAsync(x => true);
         }
 
+        public async Task ClearProductCache()
+        {
+            await _products.Database.DropCollectionAsync("products");
+        }
+
         //Order
         public async Task<List<Order>> GetAllOrders()
         {
@@ -113,6 +123,11 @@ namespace GamerShop.Core.Repositories
         public async Task<long> GetOrderCount()
         {
             return await _orders.CountDocumentsAsync(x => true);
+        }
+
+        public async Task ClearOrderCache()
+        {
+            await _orders.Database.DropCollectionAsync("orders");
         }
     }
 }

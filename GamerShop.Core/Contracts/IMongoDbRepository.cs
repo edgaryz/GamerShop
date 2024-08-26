@@ -10,6 +10,7 @@ namespace GamerShop.Core.Contracts
         Task InsertUserList(List<User> user);
         Task InsertUser(User user);
         Task<long> GetUserCount();
+        Task ClearUserCache();
 
         //Product
         Task<List<Product>> GetAllProducts();
@@ -17,6 +18,7 @@ namespace GamerShop.Core.Contracts
         Task InsertProductList(List<Product> products);
         Task InsertProduct(Product product);
         Task<long> GetProductCount();
+        Task ClearProductCache();
 
         //Order
         Task<List<Order>> GetAllOrders();
@@ -24,5 +26,6 @@ namespace GamerShop.Core.Contracts
         Task InsertOrderList(List<Order> orders);
         Task InsertOrder(Order order);
         Task<long> GetOrderCount();
+        Task ClearOrderCache();
     }
 }

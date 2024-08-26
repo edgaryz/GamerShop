@@ -6,14 +6,29 @@ namespace GamerShop.Core.Services
     public class ProductService : IProductService
     {
         public readonly IProductRepository _productDbRepository;
-        public ProductService(IProductRepository productDbRepository)
+        public readonly IMongoDbRepository _productMongoDbRepository;
+        public ProductService(IProductRepository productDbRepository, IMongoDbRepository productMongoDbRepository)
         {
             _productDbRepository = productDbRepository;
+            _productMongoDbRepository = productMongoDbRepository;
         }
 
         public async Task<List<Product>> GetAllProducts()
         {
-            return await _productDbRepository.GetAllProducts();
+            List<Product> productList;
+
+            if (await _productDbRepository.GetTotalProductCount() != await _productMongoDbRepository.GetProductCount())
+            {
+                await _productMongoDbRepository.ClearProductCache();
+                productList = await _productDbRepository.GetAllProducts();
+                await _productMongoDbRepository.InsertProductList(productList);
+            }
+            else
+            {
+                productList = await _productMongoDbRepository.GetAllProducts();
+            }
+
+            return productList;
         }
 
         public async Task<int> GetTotalProductCount()
@@ -23,7 +38,16 @@ namespace GamerShop.Core.Services
 
         public async Task<Product> GetProductById(int id)
         {
-            return await _productDbRepository.GetProductById(id);
+            var product = await _productMongoDbRepository.GetProductById(id);
+
+            if (product != null)
+            {
+                return product;
+            }
+
+            product = await _productDbRepository.GetProductById(id);
+            await _productMongoDbRepository.InsertProduct(product);
+            return product;
         }
 
         public async Task CreateProduct(Product product)

@@ -6,14 +6,29 @@ namespace GamerShop.Core.Services
     public class OrderService : IOrderService
     {
         public readonly IOrderRepository _orderDbRepository;
-        public OrderService(IOrderRepository OrderDbRepository)
+        public readonly IMongoDbRepository _orderMongoDbRepository;
+        public OrderService(IOrderRepository OrderDbRepository, IMongoDbRepository orderMongoDbRepository)
         {
             _orderDbRepository = OrderDbRepository;
+            _orderMongoDbRepository = orderMongoDbRepository;
         }
 
         public async Task<List<Order>> GetAllOrders()
         {
-            return await _orderDbRepository.GetAllOrders();
+            List<Order> orderList;
+
+            if (await _orderDbRepository.GetTotalOrderCount() != await _orderMongoDbRepository.GetOrderCount())
+            {
+                await _orderMongoDbRepository.ClearOrderCache();
+                orderList = await _orderDbRepository.GetAllOrders();
+                await _orderMongoDbRepository.InsertOrderList(orderList);
+            }
+            else
+            {
+                orderList = await _orderMongoDbRepository.GetAllOrders();
+            }
+
+            return orderList;
         }
 
         public async Task<int> GetTotalOrderCount()
@@ -23,7 +38,16 @@ namespace GamerShop.Core.Services
 
         public async Task<Order> GetOrderById(int id)
         {
-            return await _orderDbRepository.GetOrderById(id);
+            var order = await _orderMongoDbRepository.GetOrderById(id);
+
+            if (order != null)
+            {
+                return order;
+            }
+
+            order = await _orderDbRepository.GetOrderById(id);
+            await _orderMongoDbRepository.InsertOrder(order);
+            return order;
         }
 
         public async Task CreateOrder(Order order)
