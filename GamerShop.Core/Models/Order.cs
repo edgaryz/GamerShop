@@ -32,5 +32,19 @@ namespace GamerShop.Core.Models
             OrderDate = orderDate;
             Quantity = quantity;
         }
+
+        public override string ToString()
+        {
+            string userType = "";
+            userType = User.GetType().Name;
+            if (userType == "Buyer")
+            {
+                return $"Order ID: {OrderId} - {User.FirstName} {User.LastName} bought {Product.Id} {Product.ProductName} {Quantity} copies.";
+            }
+            else
+            {
+                return $"Order ID: {OrderId} - {User.FirstName} {User.LastName} sold {Product.Id} {Product.ProductName} {Quantity} copies.";
+            }
+        }
     }
 }

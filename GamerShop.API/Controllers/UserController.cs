@@ -42,12 +42,39 @@ namespace GamerShop.API.Controllers
             }
         }
 
-        [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
+        [HttpPost("CreateUser/{userType}")]
+        public async Task<IActionResult> CreateUser([FromBody] User user, string userType)
         {
+            User userByType;
+
+            if (userType == "Buyer")
+            {
+                userByType = new Buyer()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                };
+            }
+            else if (userType == "Seller")
+            {
+                userByType = new Seller()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                };
+            }
+            else
+            {
+                throw new Exception("no such type");
+            }
+
             try
             {
-                await _businessLogicService.CreateUser(user);
+                await _businessLogicService.CreateUser(userByType);
                 return Ok();
             }
             catch (Exception ex)

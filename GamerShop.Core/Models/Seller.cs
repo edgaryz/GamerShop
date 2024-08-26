@@ -1,7 +1,4 @@
-﻿using GamerShop.Core.Enums;
-using System.Diagnostics;
-
-namespace GamerShop.Core.Models
+﻿namespace GamerShop.Core.Models
 {
     public class Seller : User
     {
