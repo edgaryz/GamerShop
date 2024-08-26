@@ -2,7 +2,7 @@
 
 namespace GamerShop.Core.Contracts
 {
-    public interface IBusinessLogicService
+    public interface IGamerShopService
     {
         //User
         Task<List<User>> GetAllUsers();

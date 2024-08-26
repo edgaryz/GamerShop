@@ -1,5 +1,6 @@
 ﻿using GamerShop.Core.Contracts;
 using GamerShop.Core.Models;
+using Serilog;
 
 namespace GamerShop.Core.Services
 {
@@ -22,10 +23,12 @@ namespace GamerShop.Core.Services
                 await _orderMongoDbRepository.ClearOrderCache();
                 orderList = await _orderDbRepository.GetAllOrders();
                 await _orderMongoDbRepository.InsertOrderList(orderList);
+                Log.Information("Got Orders from DB");
             }
             else
             {
                 orderList = await _orderMongoDbRepository.GetAllOrders();
+                Log.Information("Got Orders from Mongo DB");
             }
 
             return orderList;
@@ -33,6 +36,7 @@ namespace GamerShop.Core.Services
 
         public async Task<int> GetTotalOrderCount()
         {
+            Log.Information("GetTotalOrderCount called");
             return await _orderDbRepository.GetTotalOrderCount();
         }
 
@@ -42,27 +46,32 @@ namespace GamerShop.Core.Services
 
             if (order != null)
             {
+                Log.Information($"User with id {order.OrderId} found in Mongo DB");
                 return order;
             }
 
             order = await _orderDbRepository.GetOrderById(id);
             await _orderMongoDbRepository.InsertOrder(order);
+            Log.Information($"User with id {order.OrderId} found in DB");
             return order;
         }
 
         public async Task CreateOrder(Order order)
         {
             await _orderDbRepository.CreateOrder(order);
+            Log.Information("CreateOrder called");
         }
 
         public async Task UpdateOrder(int id, Order updatedOrder)
         {
             await _orderDbRepository.UpdateOrder(id, updatedOrder);
+            Log.Information("UpdateOrder called");
         }
 
         public async Task DeleteOrder(int id)
         {
             await _orderDbRepository.DeleteOrder(id);
+            Log.Information("DeleteOrder called");
         }
     }
 }

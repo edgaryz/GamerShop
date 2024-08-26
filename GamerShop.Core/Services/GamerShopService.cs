@@ -3,12 +3,12 @@ using GamerShop.Core.Models;
 
 namespace GamerShop.Core.Services
 {
-    public class BusinessLogicService : IBusinessLogicService
+    public class GamerShopService : IGamerShopService
     {
         private readonly IUserService _userService;
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
-        public BusinessLogicService(IUserService userService, IProductService productService, IOrderService orderService)
+        public GamerShopService(IUserService userService, IProductService productService, IOrderService orderService)
         {
             _userService = userService;
             _productService = productService;

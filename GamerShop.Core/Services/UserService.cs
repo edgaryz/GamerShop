@@ -23,12 +23,12 @@ namespace GamerShop.Core.Services
                 await _userMongoDbRepository.ClearUserCache();
                 userList = await _userDbRepository.GetAllUsers();
                 await _userMongoDbRepository.InsertUserList(userList);
-                Log.Information("Got Users form DB");
+                Log.Information("Got Users from DB");
             }
             else
             {
-                Log.Information("Got Users form Mongo DB");
                 userList = await _userMongoDbRepository.GetAllUsers();
+                Log.Information("Got Users from Mongo DB");
             }
 
             return userList;
@@ -58,20 +58,20 @@ namespace GamerShop.Core.Services
 
         public async Task CreateUser(User user)
         {
-            Log.Information("CreateUser called");
             await _userDbRepository.CreateUser(user);
+            Log.Information("CreateUser called");
         }
 
         public async Task UpdateUser(int id, User updatedUser)
         {
-            Log.Information("UpdateUser called");
             await _userDbRepository.UpdateUser(id, updatedUser);
+            Log.Information("UpdateUser called");
         }
 
         public async Task DeleteUser(int id)
         {
-            Log.Information("DeleteUser called");
             await _userDbRepository.DeleteUser(id);
+            Log.Information("DeleteUser called");
         }
     }
 }

@@ -27,7 +27,7 @@ builder.Services.AddSingleton<IMongoClient, MongoClient>(_ => new MongoClient("m
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
-builder.Services.AddTransient<IBusinessLogicService, BusinessLogicService>();
+builder.Services.AddTransient<IGamerShopService, GamerShopService>();
 
 builder.Services.AddCors(options =>
 {

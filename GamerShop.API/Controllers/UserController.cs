@@ -6,10 +6,10 @@ namespace GamerShop.API.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IBusinessLogicService _businessLogicService;
-        public UserController(IBusinessLogicService businessLogicService)
+        private readonly IGamerShopService _gamerShopService;
+        public UserController(IGamerShopService gamerShopService)
         {
-            _businessLogicService = businessLogicService;
+            _gamerShopService = gamerShopService;
         }
 
         [HttpGet("GetAllUsers")]
@@ -17,7 +17,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                var allUsers = await _businessLogicService.GetAllUsers();
+                var allUsers = await _gamerShopService.GetAllUsers();
                 return Ok(allUsers);
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                var user = await _businessLogicService.GetUserById(id);
+                var user = await _gamerShopService.GetUserById(id);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace GamerShop.API.Controllers
 
             try
             {
-                await _businessLogicService.CreateUser(userByType);
+                await _gamerShopService.CreateUser(userByType);
                 return Ok();
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.UpdateUser(id, updatedUser);
+                await _gamerShopService.UpdateUser(id, updatedUser);
                 return Ok();
             }
             catch (ArgumentException ex)
@@ -114,7 +114,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.DeleteUser(id);
+                await _gamerShopService.DeleteUser(id);
                 return Ok();
             }
             catch (Exception ex)

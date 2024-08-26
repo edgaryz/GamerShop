@@ -6,10 +6,10 @@ namespace GamerShop.API.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IBusinessLogicService _businessLogicService;
-        public OrderController(IBusinessLogicService businessLogicService)
+        private readonly IGamerShopService _gamerShopService;
+        public OrderController(IGamerShopService gamerShopService)
         {
-            _businessLogicService = businessLogicService;
+            _gamerShopService = gamerShopService;
         }
 
         [HttpGet("GetAllOrders")]
@@ -17,7 +17,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                var allOrders = await _businessLogicService.GetAllOrders();
+                var allOrders = await _gamerShopService.GetAllOrders();
                 return Ok(allOrders);
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                var Order = await _businessLogicService.GetOrderById(id);
+                var Order = await _gamerShopService.GetOrderById(id);
                 return Ok(Order);
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.CreateOrder(order);
+                await _gamerShopService.CreateOrder(order);
                 return Ok();
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.UpdateOrder(id, updatedOrder);
+                await _gamerShopService.UpdateOrder(id, updatedOrder);
                 return Ok();
             }
             catch (ArgumentException ex)
@@ -87,7 +87,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.DeleteOrder(id);
+                await _gamerShopService.DeleteOrder(id);
                 return Ok();
             }
             catch (Exception ex)

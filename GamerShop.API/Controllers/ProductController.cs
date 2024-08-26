@@ -6,10 +6,10 @@ namespace GamerShop.API.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IBusinessLogicService _businessLogicService;
-        public ProductController(IBusinessLogicService businessLogicService)
+        private readonly IGamerShopService _gamerShopService;
+        public ProductController(IGamerShopService gamerShopService)
         {
-            _businessLogicService = businessLogicService;
+            _gamerShopService = gamerShopService;
         }
 
         [HttpGet("GetAllProducts")]
@@ -17,7 +17,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                var allProducts = await _businessLogicService.GetAllProducts();
+                var allProducts = await _gamerShopService.GetAllProducts();
                 return Ok(allProducts);
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                var Product = await _businessLogicService.GetProductById(id);
+                var Product = await _gamerShopService.GetProductById(id);
                 return Ok(Product);
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.CreateProduct(product);
+                await _gamerShopService.CreateProduct(product);
                 return Ok();
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.UpdateProduct(id, updatedProduct);
+                await _gamerShopService.UpdateProduct(id, updatedProduct);
                 return Ok();
             }
             catch (ArgumentException ex)
@@ -87,7 +87,7 @@ namespace GamerShop.API.Controllers
         {
             try
             {
-                await _businessLogicService.DeleteProduct(id);
+                await _gamerShopService.DeleteProduct(id);
                 return Ok();
             }
             catch (Exception ex)
