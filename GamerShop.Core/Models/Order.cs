@@ -42,8 +42,7 @@ namespace GamerShop.Core.Models
 
         public override string ToString()
         {
-            string userType = "";
-            userType = User.GetType().Name;
+            string userType = User.GetType().Name;
             if (userType == "Buyer")
             {
                 return $"Order ID: {OrderId} - {User.FirstName} {User.LastName} bought {Product.Id} {Product.ProductName} {Quantity} copies.";

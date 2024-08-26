@@ -51,9 +51,9 @@ namespace GamerShop.Test
             IUserService userService = new UserService(_usersRepository.Object, _usersMongoRepository.Object);
 
             //Act
-            var evTestList = await userService.GetAllUsers();
+            var testList = await userService.GetAllUsers();
             //Assert
-            Assert.Equal(userList.Count, evTestList.Count);
+            Assert.Equal(userList.Count, testList.Count);
         }
     }
 }

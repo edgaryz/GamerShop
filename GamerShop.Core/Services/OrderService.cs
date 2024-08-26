@@ -64,6 +64,7 @@ namespace GamerShop.Core.Services
 
         public async Task UpdateOrder(int id, Order updatedOrder)
         {
+            await _orderMongoDbRepository.ClearOrderCache();
             await _orderDbRepository.UpdateOrder(id, updatedOrder);
             Log.Information("UpdateOrder called");
         }

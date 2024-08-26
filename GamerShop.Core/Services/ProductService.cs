@@ -64,6 +64,7 @@ namespace GamerShop.Core.Services
 
         public async Task UpdateProduct(int id, Product updatedProduct)
         {
+            await _productMongoDbRepository.ClearProductCache();
             await _productDbRepository.UpdateProduct(id, updatedProduct);
             Log.Information("UpdateProduct called");
         }

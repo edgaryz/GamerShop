@@ -64,6 +64,7 @@ namespace GamerShop.Core.Services
 
         public async Task UpdateUser(int id, User updatedUser)
         {
+            await _userMongoDbRepository.ClearUserCache();
             await _userDbRepository.UpdateUser(id, updatedUser);
             Log.Information("UpdateUser called");
         }
