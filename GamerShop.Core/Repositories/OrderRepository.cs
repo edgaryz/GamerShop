@@ -11,6 +11,12 @@ namespace GamerShop.Core.Repositories
             using (var context = new MyDbContext())
             {
                 List<Order> allOrders = await context.Orders.ToListAsync();
+                //to display User and Product as object in return
+                foreach (var order in allOrders)
+                {
+                    context.Entry(order).Reference(x => x.User).Load();
+                    context.Entry(order).Reference(x => x.Product).Load();
+                }
                 return allOrders;
             }
         }
@@ -27,7 +33,10 @@ namespace GamerShop.Core.Repositories
         {
             using (var context = new MyDbContext())
             {
-                return await context.Orders.FindAsync(id);
+                var order = await context.Orders.FindAsync(id);
+                context.Entry(order).Reference(x => x.User).Load();
+                context.Entry(order).Reference(x => x.Product).Load();
+                return order;
             }
         }
 
