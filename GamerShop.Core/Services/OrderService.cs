@@ -5,8 +5,8 @@ namespace GamerShop.Core.Services
 {
     public class OrderService : IOrderService
     {
-        public readonly IOrderRepository _orderDbRepository;
-        public readonly IMongoDbRepository _orderMongoDbRepository;
+        private readonly IOrderRepository _orderDbRepository;
+        private readonly IMongoDbRepository _orderMongoDbRepository;
         public OrderService(IOrderRepository OrderDbRepository, IMongoDbRepository orderMongoDbRepository)
         {
             _orderDbRepository = OrderDbRepository;

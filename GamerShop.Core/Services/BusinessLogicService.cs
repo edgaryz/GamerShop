@@ -5,10 +5,9 @@ namespace GamerShop.Core.Services
 {
     public class BusinessLogicService : IBusinessLogicService
     {
-        public readonly IUserService _userService;
-        public readonly IProductService _productService;
-        public readonly IOrderService _orderService;
-
+        private readonly IUserService _userService;
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
         public BusinessLogicService(IUserService userService, IProductService productService, IOrderService orderService)
         {
             _userService = userService;

@@ -5,8 +5,8 @@ namespace GamerShop.Core.Services
 {
     public class ProductService : IProductService
     {
-        public readonly IProductRepository _productDbRepository;
-        public readonly IMongoDbRepository _productMongoDbRepository;
+        private readonly IProductRepository _productDbRepository;
+        private readonly IMongoDbRepository _productMongoDbRepository;
         public ProductService(IProductRepository productDbRepository, IMongoDbRepository productMongoDbRepository)
         {
             _productDbRepository = productDbRepository;
