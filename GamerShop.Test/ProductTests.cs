@@ -47,4 +47,5 @@ namespace GamerShop.Test
             //Assert
             Assert.Equal(productList.Count, testList.Count);
         }
+    }
 }
