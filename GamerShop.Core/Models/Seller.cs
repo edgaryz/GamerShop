@@ -1,4 +1,7 @@
-﻿namespace GamerShop.Core.Models
+﻿using GamerShop.Core.Enums;
+using System.Diagnostics;
+
+namespace GamerShop.Core.Models
 {
     public class Seller : User
     {
@@ -17,6 +20,11 @@
         public async Task SellProduct(Product product)
         {
             ProductsForSale.Remove(product);
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id} - Seller {FirstName} {LastName}, Email: {Email}, Phone Number: {PhoneNumber}";
         }
     }
 }

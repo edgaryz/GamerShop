@@ -18,5 +18,10 @@
         {
             ProductsCart.Add(product);
         }
+
+        public override string ToString()
+        {
+            return $"ID: {Id} - Buyer {FirstName} {LastName}, Email: {Email}, Phone Number: {PhoneNumber}";
+        }
     }
 }
