@@ -1,10 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace GamerShop.Core.Models
 {
     public class Order
     {
+        [NotMapped]
+        [JsonIgnore]
+        [BsonId]
+        public ObjectId MongoOrderId { get; set; }
         [Key]
         public int OrderId { get; set; }
         [ForeignKey("ProductId")]
