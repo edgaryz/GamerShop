@@ -216,7 +216,6 @@ namespace GamerShop.Test
             //Act
             await userService.CreateUser(buyer);
             await userService.DeleteUser(16);
-            var createdUserList = userService.GetTotalUserCount;
             var testListCount = await userService.GetTotalUserCount();
             //Assert
             Assert.Equal(0, testListCount);
