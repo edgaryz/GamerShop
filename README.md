@@ -153,3 +153,5 @@ METHOD GET GetOrderById returns Json of selected order by ID.
 METHOD POST CreateOrder inserts order into DB table.
 METHOD PATCH UpdateOrder updates Json of selected order.
 METHOD DELETE DeleteOrder deletes order by inputted ID.
+
+## For Logs API uses Serilog
