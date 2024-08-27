@@ -1,13 +1,16 @@
 # GamerShop API project uses Entity Framework to worth with database and MongoDB as cache.
 ### To configure DB we need these shell commands:
-### dotnet tool install --global dotnet-ef
-### dotnet ef migrations add InitialCreate (Migration Creation - In this case, InitialCreate is the name of the migration)
-### dotnet ef database update (Executing the migration on the database)
+>dotnet tool install --global dotnet-ef
+>
+>dotnet ef migrations add InitialCreate (Migration Creation - In this case, InitialCreate is the name of the migration)
+>
+>dotnet ef database update (Executing the migration on the database)
 
 Project contains 3 Controllers:
 >UserController / ProductController / OrderController
 
 UserController
+>
 METHOD GET GetAllUsers returns Json of all existing users.
 >Return
 ```json
@@ -42,6 +45,7 @@ METHOD PATCH UpdateUser updates Json of selected user.
 METHOD DELETE DeleteUser deletes user by inputted ID.
 
 ProductController
+>
 METHOD GET GetAllProducts returns Json of all existing products.
 >Return
 ```json
@@ -78,6 +82,7 @@ METHOD PATCH UpdateProduct updates Json of selected product.
 METHOD DELETE DeleteProduct deletes product by inputted ID.
 
 OrderController
+>
 METHOD GET GetAllOrders returns Json of all existing orders.
 >Return
 ```json
