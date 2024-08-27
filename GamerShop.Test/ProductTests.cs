@@ -21,7 +21,7 @@ namespace GamerShop.Test
                 Id = 15,
                 ProductName = "Zelda 3",
                 Price = 12.99M,
-                ProductType = 0,
+                ProductType = ProductType.PCGame,
                 CountInStorage = 15
             };
 
@@ -30,7 +30,7 @@ namespace GamerShop.Test
                 Id = 16,
                 ProductName = "CS GO",
                 Price = 9.99M,
-                ProductType = ((ProductType)1),
+                ProductType = ProductType.DLC,
                 CountInStorage = 20
             };
 
@@ -61,7 +61,7 @@ namespace GamerShop.Test
                 Id = 15,
                 ProductName = "Zelda 3",
                 Price = 12.99M,
-                ProductType = 0,
+                ProductType = ProductType.PCGame,
                 CountInStorage = 15
             };
 
@@ -90,7 +90,7 @@ namespace GamerShop.Test
                 Id = 15,
                 ProductName = "Zelda 3",
                 Price = 12.99M,
-                ProductType = 0,
+                ProductType = ProductType.PCGame,
                 CountInStorage = 15
             };
 
@@ -99,7 +99,7 @@ namespace GamerShop.Test
                 Id = 16,
                 ProductName = "CS GO",
                 Price = 9.99M,
-                ProductType = ((ProductType)1),
+                ProductType = ProductType.DLC,
                 CountInStorage = 20
             };
 
@@ -128,7 +128,7 @@ namespace GamerShop.Test
                 Id = 15,
                 ProductName = "Zelda 3",
                 Price = 12.99M,
-                ProductType = 0,
+                ProductType = ProductType.PCGame,
                 CountInStorage = 15
             };
 
@@ -157,7 +157,7 @@ namespace GamerShop.Test
                 Id = 16,
                 ProductName = "Zelda 3",
                 Price = 12.99M,
-                ProductType = 0,
+                ProductType = ProductType.PCGame,
                 CountInStorage = 15
             };
 
@@ -166,7 +166,7 @@ namespace GamerShop.Test
                 Id = 16,
                 ProductName = "CS GO",
                 Price = 9.99M,
-                ProductType = ((ProductType)1),
+                ProductType = ProductType.DLC,
                 CountInStorage = 20
             };
 
@@ -194,7 +194,7 @@ namespace GamerShop.Test
                 Id = 16,
                 ProductName = "Zelda 3",
                 Price = 12.99M,
-                ProductType = 0,
+                ProductType = ProductType.PCGame,
                 CountInStorage = 15
             };
 
