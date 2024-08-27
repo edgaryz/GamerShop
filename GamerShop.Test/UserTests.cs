@@ -150,7 +150,7 @@ namespace GamerShop.Test
 
             //Act
             await userService.CreateUser(buyer);
-            var createdUser = userList.Find(x => x.Id.Equals(16));
+            var createdUser = await userService.GetUserById(16);
             //Assert
             Assert.Equal("Edgar", createdUser.FirstName);
         }
@@ -162,8 +162,6 @@ namespace GamerShop.Test
             Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
             Mock<IMongoDbRepository> _usersMongoRepository = new Mock<IMongoDbRepository>();
 
-            List<User> userList = new List<User>();
-
             Buyer buyer = new Buyer
             {
                 Id = 16,
@@ -172,8 +170,6 @@ namespace GamerShop.Test
                 Email = "Juggernaut@mail.com",
                 PhoneNumber = "1568742135"
             };
-
-            userList.Add(buyer);
 
             Buyer buyerUpdated = new Buyer
             {
@@ -184,6 +180,7 @@ namespace GamerShop.Test
                 PhoneNumber = "1564487135"
             };
 
+            _usersRepository.Setup(x => x.CreateUser(buyer));
             _usersRepository.Setup(x => x.UpdateUser(16, buyerUpdated));
             _usersRepository.Setup(x => x.GetUserById(16).Result).Returns(buyerUpdated);
             IUserService userService = new UserService(_usersRepository.Object, _usersMongoRepository.Object);
@@ -202,8 +199,6 @@ namespace GamerShop.Test
             Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
             Mock<IMongoDbRepository> _usersMongoRepository = new Mock<IMongoDbRepository>();
 
-            List<User> userList = new List<User>();
-
             Buyer buyer = new Buyer
             {
                 Id = 16,
@@ -213,7 +208,6 @@ namespace GamerShop.Test
                 PhoneNumber = "+1568742135"
             };
 
-            userList.Add(buyer);
             _usersRepository.Setup(x => x.CreateUser(buyer));
             _usersRepository.Setup(x => x.DeleteUser(16));
             _usersRepository.Setup(x => x.GetUserById(16).Result).Returns(buyer);
@@ -222,7 +216,7 @@ namespace GamerShop.Test
             //Act
             await userService.CreateUser(buyer);
             await userService.DeleteUser(16);
-            var createdUser = userList.Find(x => x.Id.Equals(16));
+            var createdUserList = userService.GetTotalUserCount;
             var testListCount = await userService.GetTotalUserCount();
             //Assert
             Assert.Equal(0, testListCount);
