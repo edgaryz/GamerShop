@@ -8,8 +8,9 @@
 
 Project contains 3 Controllers:
 >UserController / ProductController / OrderController
-
-UserController
+>
+>
+## UserController
 >
 METHOD GET GetAllUsers returns Json of all existing users.
 >Return
@@ -41,10 +42,13 @@ METHOD GET GetUserById returns Json of selected user by ID.
   }
 ```
 METHOD POST CreateUser inserts user into DB table. As input it takes "userType" and then checks if its "Buyer" or "Seller".
+>
 METHOD PATCH UpdateUser updates Json of selected user.
+>
 METHOD DELETE DeleteUser deletes user by inputted ID.
-
-ProductController
+>
+>
+## ProductController
 >
 METHOD GET GetAllProducts returns Json of all existing products.
 >Return
@@ -78,10 +82,13 @@ METHOD GET GetProductById returns Json of selected product by ID.
 }
 ```
 METHOD POST CreateProduct inserts product into DB table.
+>
 METHOD PATCH UpdateProduct updates Json of selected product.
+>
 METHOD DELETE DeleteProduct deletes product by inputted ID.
-
-OrderController
+>
+>
+## OrderController
 >
 METHOD GET GetAllOrders returns Json of all existing orders.
 >Return
@@ -151,7 +158,10 @@ METHOD GET GetOrderById returns Json of selected order by ID.
 }
 ```
 METHOD POST CreateOrder inserts order into DB table.
+>
 METHOD PATCH UpdateOrder updates Json of selected order.
+>
 METHOD DELETE DeleteOrder deletes order by inputted ID.
-
+>
+>
 ## For Logs API uses Serilog
