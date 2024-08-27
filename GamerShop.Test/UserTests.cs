@@ -58,7 +58,37 @@ namespace GamerShop.Test
         }
 
         [Fact]
-        public async Task GetElectricCarByIdTest()
+        public async Task GetUserCountTest()
+        {
+            //Arrange
+            Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
+            Mock<IMongoDbRepository> _usersMongoRepository = new Mock<IMongoDbRepository>();
+
+            List<User> userList = new List<User>();
+
+            Seller seller3 = new Seller
+            {
+                Id = 17,
+                FirstName = "Edgar",
+                LastName = "Rikuda",
+                Email = "Rikuda@mail.com",
+                PhoneNumber = "1564487135"
+            };
+
+            userList.Add(seller3);
+
+            _usersRepository.Setup(x => x.GetTotalUserCount().Result).Returns(userList.Count);
+            _usersMongoRepository.Setup(x => x.GetUserCount().Result).Returns(0);
+            IUserService userService = new UserService(_usersRepository.Object, _usersMongoRepository.Object);
+
+            //Act
+            var testList = await userService.GetTotalUserCount();
+            //Assert
+            Assert.Equal(userList.Count, testList);
+        }
+
+        [Fact]
+        public async Task GetUserByIdTest()
         {
             //Arrange
             Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
@@ -95,7 +125,38 @@ namespace GamerShop.Test
         }
 
         [Fact]
-        public async Task UpdateElectricCarTest()
+        public async Task CreateUserTest()
+        {
+            //Arrange
+            Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
+            Mock<IMongoDbRepository> _usersMongoRepository = new Mock<IMongoDbRepository>();
+
+            List<User> userList = new List<User>();
+
+            Buyer buyer = new Buyer
+            {
+                Id = 16,
+                FirstName = "Edgar",
+                LastName = "Juggernaut",
+                Email = "Juggernaut@mail.com",
+                PhoneNumber = "+1568742135"
+            };
+
+            userList.Add(buyer);
+
+            _usersRepository.Setup(x => x.CreateUser(buyer));
+            _usersRepository.Setup(x => x.GetUserById(16).Result).Returns(buyer);
+            IUserService userService = new UserService(_usersRepository.Object, _usersMongoRepository.Object);
+
+            //Act
+            await userService.CreateUser(buyer);
+            var createdUser = userList.Find(x => x.Id.Equals(16));
+            //Assert
+            Assert.Equal("Edgar", createdUser.FirstName);
+        }
+
+        [Fact]
+        public async Task UpdateUserTest()
         {
             //Arrange
             Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
@@ -132,6 +193,39 @@ namespace GamerShop.Test
             var result = await userService.GetUserById(16);
             //Assert
             Assert.Equal("Rikuda", result.LastName);
+        }
+
+        [Fact]
+        public async Task DeleteUserTest()
+        {
+            //Arrange
+            Mock<IUserRepository> _usersRepository = new Mock<IUserRepository>();
+            Mock<IMongoDbRepository> _usersMongoRepository = new Mock<IMongoDbRepository>();
+
+            List<User> userList = new List<User>();
+
+            Buyer buyer = new Buyer
+            {
+                Id = 16,
+                FirstName = "Edgar",
+                LastName = "Juggernaut",
+                Email = "Juggernaut@mail.com",
+                PhoneNumber = "+1568742135"
+            };
+
+            userList.Add(buyer);
+            _usersRepository.Setup(x => x.CreateUser(buyer));
+            _usersRepository.Setup(x => x.DeleteUser(16));
+            _usersRepository.Setup(x => x.GetUserById(16).Result).Returns(buyer);
+            IUserService userService = new UserService(_usersRepository.Object, _usersMongoRepository.Object);
+
+            //Act
+            await userService.CreateUser(buyer);
+            await userService.DeleteUser(16);
+            var createdUser = userList.Find(x => x.Id.Equals(16));
+            var testListCount = await userService.GetTotalUserCount();
+            //Assert
+            Assert.Equal(0, testListCount);
         }
     }
 }
