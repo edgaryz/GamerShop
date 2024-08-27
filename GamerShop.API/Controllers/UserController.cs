@@ -46,6 +46,18 @@ namespace GamerShop.API.Controllers
         public async Task<IActionResult> CreateUser([FromBody] User user, string userType)
         {
             User userByType;
+            var userEmail = user.Email.ToString();
+            var userPhoneNumber = user.PhoneNumber.ToString();
+
+            if (!userEmail.Contains("@"))
+            {
+                return BadRequest("Email is not valid");
+            }
+
+            if (!userPhoneNumber.StartsWith("+") && !userPhoneNumber.StartsWith("00"))
+            {
+                return BadRequest("Phone number is not valid");
+            }
 
             if (userType == "Buyer")
             {
