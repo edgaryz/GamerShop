@@ -1,4 +1,4 @@
-# GamerShop API project uses Entity Framework to worth with database and MongoDB as cache.
+# GamerShop API project uses Entity Framework to work with database and MongoDB as cache.
 ### To configure DB we need these shell commands:
 >dotnet tool install --global dotnet-ef
 >
